@@ -1,10 +1,127 @@
 <!doctype html>
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Arjun Pulivarthi — Coming Soon</title>
-<style>html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto}
-.grid{min-height:100%;display:grid;place-items:center;text-align:center;padding:24px}
-h1{margin:0 0 8px}p{opacity:.75;margin:0}</style>
-<body><main class="grid"><div>
-  <h1>arjunpulivarthi.tech</h1>
-  <p>Personal website under construction. Launching soon.</p>
-</div></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arjun Pulivarthi — AI/ML Engineer</title>
+  <meta name="description" content="Portfolio of Arjun Pulivarthi — AI/ML Engineer, Innovator, Entrepreneur." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="#" class="logo">AP</a>
+    <nav id="nav" class="nav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact" class="btn">Contact</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <h1>Arjun Pulivarthi</h1>
+        <p class="tagline">AI/ML Engineer · Innovator · Entrepreneur</p>
+        <div class="cta">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn secondary" href="#contact">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <h2>About</h2>
+      <p>
+        B.Tech (AIML), Dayananda Sagar University, Bangalore. I build practical AI systems—
+        from NLP explainability (XAI) to OCR pipelines and real-time dashboards.
+      </p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>UniCard</h3>
+          <p>RFID-enabled campus payments with Admin/Cashier/Student dashboards.</p>
+          <p class="tech">Flask · SQLite · Razorpay · Twilio</p>
+          <!-- <a href="#" class="link">GitHub</a> -->
+        </article>
+        <article class="card">
+          <h3>SubjectiveSemanticAI</h3>
+          <p>Automated descriptive answer evaluation using TF-IDF & SBERT with XAI.</p>
+          <p class="tech">Python · scikit-learn · sentence-transformers · Streamlit</p>
+        </article>
+        <article class="card">
+          <h3>NexCard Website</h3>
+          <p>Apple-style marketing site for smart campus card product.</p>
+          <p class="tech">TypeScript · React · CSS</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section">
+      <h2>Experience</h2>
+      <ul class="timeline">
+        <li>
+          <div>
+            <h3>IEEE CIS — Chair</h3>
+            <p>Led events, talks, and hackathon teams; mentored juniors in AI/ML.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>NIT Puducherry — Intern</h3>
+            <p>Research & prototyping in Computer Vision and ML workflows.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="chipset">
+        <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">TensorFlow</span>
+        <span class="chip">PyTorch</span><span class="chip">NLP</span><span class="chip">XAI</span>
+        <span class="chip">OCR</span><span class="chip">SQL</span><span class="chip">Git</span>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements" class="section">
+      <h2>Achievements</h2>
+      <ul class="bullets">
+        <li>KLE GirlGeekHack — Winner (Sakhi Samriddhi)</li>
+        <li>Reva Smart Agro Hackathon — Podium</li>
+        <li>Multiple DSU hackathons — AI/ML tracks</li>
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:hello@arjunpulivarthi.tech">hello@arjunpulivarthi.tech</a></p>
+      <p>
+        <a href="https://github.com/arjunpulivarthi" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a> ·
+        <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© <span id="year"></span> Arjun Pulivarthi. All rights reserved.</small>
+  </footer>
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
