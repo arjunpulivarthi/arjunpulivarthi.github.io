@@ -279,7 +279,7 @@ a:hover{opacity:.9}
     align-self: end;               /* sit a touch lower for balance */
   }
   .hero__img{
-    transform: translateZ(0) scale(1.85); /* tasteful zoom */
+    transform: translateZ(0) scale(2.4); /* tasteful zoom */
 
   }
 }
@@ -388,3 +388,11 @@ a:hover{opacity:.9}
 @media (max-width:700px){
   .deck-btn{ bottom: -40px; }
 }
+/* Center the GitHub button and keep it yellow with a logo */
+.card__actions{ display:flex; justify-content:center; margin-top:10px; }
+.btn--github{
+  background: var(--brand-gradient);
+  color:#0A0C10; border:0; border-radius:12px;
+  padding:10px 14px; display:inline-flex; align-items:center; gap:8px;
+}
+.btn--github svg{ width:18px; height:18px; fill:#0A0C10; display:block; }
