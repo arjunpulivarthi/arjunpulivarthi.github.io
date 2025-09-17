@@ -70,3 +70,90 @@ document.querySelectorAll('.cards').forEach(group=>{
     io.observe(card);
   });
 });
+// ============================
+// Shuffling deck for Experience
+// ============================
+(function initShuffleDeck(selector = '#expDeck'){
+  const deck = document.querySelector(selector);
+  if (!deck) return;
+  let cards = [...deck.querySelectorAll('.card')];
+  if (cards.length <= 1) return;
+
+  const prevBtn = deck.querySelector('.deck-prev');
+  const nextBtn = deck.querySelector('.deck-next');
+
+  // Layout cards in a stacked "deck"
+  function layout(activeIndex = idx){
+    // set deck height to tallest card to avoid layout jump
+    const H = Math.max(...cards.map(c => (c.style.transform='', c.offsetHeight)));
+    deck.style.height = H + 'px';
+
+    cards.forEach((card, i) => {
+      const order = (i - activeIndex + cards.length) % cards.length; // 0 = top
+      const clamped = Math.min(order, 2); // show top 3 layers
+      const y = clamped * 14;             // stagger
+      const scale = 1 - clamped * 0.04;   // slight depth
+      const opacity = order > 2 ? 0 : 1 - clamped * 0.12;
+      card.style.zIndex = 100 - order;
+      card.style.opacity = opacity;
+      card.style.transform = `translate(-50%, ${y}px) scale(${scale})`;
+    });
+  }
+
+  let idx = 0;
+  function next(){
+    const top = cards[idx];
+    // animate top out, then re-layout
+    top.style.transform = `translate(calc(-50% - 120%), -10px) rotate(-2deg) scale(0.98)`;
+    top.style.opacity = 0;
+    top.addEventListener('transitionend', () => {
+      idx = (idx + 1) % cards.length;
+      layout();
+    }, { once: true });
+  }
+  function prev(){
+    // quickly set previous as "leaving from left" then layout
+    idx = (idx - 1 + cards.length) % cards.length;
+    const top = cards[idx];
+    top.style.transform = `translate(calc(-50% + 120%), -10px) rotate(2deg) scale(0.98)`;
+    top.style.opacity = 0;
+    requestAnimationFrame(() => requestAnimationFrame(layout));
+  }
+
+  // Events
+  deck.addEventListener('click', (e) => {
+    // click on empty space or card advances
+    if (!e.target.closest('.deck-btn')) next();
+  });
+  nextBtn && nextBtn.addEventListener('click', (e)=>{ e.stopPropagation(); next(); });
+  prevBtn && prevBtn.addEventListener('click', (e)=>{ e.stopPropagation(); prev(); });
+
+  // Keyboard (arrow keys)
+  deck.setAttribute('tabindex', '0');
+  deck.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  // Touch swipe
+  let startX = null, startY = null;
+  deck.addEventListener('touchstart', (e)=>{
+    const t = e.changedTouches[0];
+    startX = t.clientX; startY = t.clientY;
+  }, {passive:true});
+  deck.addEventListener('touchend', (e)=>{
+    if (startX === null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX, dy = t.clientY - startY;
+    if (Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy)) {
+      dx < 0 ? next() : prev();
+    }
+    startX = startY = null;
+  }, {passive:true});
+
+  // Recompute on resize (card heights can change)
+  window.addEventListener('resize', () => layout(), { passive:true });
+
+  // Initial paint
+  layout();
+})();

@@ -112,27 +112,18 @@ a:hover{opacity:.9}
   .nav__list.open{display:flex}
 }
 
-/* HERO — guaranteed full screen & centered */
-/* HERO — truly full screen and perfectly centered */
+/* HERO — full screen, copy left + image right (clean) */
 .hero{
   position:relative;
-  min-height:100vh;     /* fallback */
-  min-height:100svh;    /* newer mobile */
-  min-height:100dvh;    /* dynamic viewport (iOS/Android) */
+  min-height:100vh;       /* fallback */
+  min-height:100svh;      /* newer mobile */
+  min-height:100dvh;      /* dynamic viewport */
   display:flex; align-items:center; justify-content:center;
   width:100%;
   padding-block: max(24px, calc(24px + var(--safe-top)))
                  max(24px, calc(24px + var(--safe-bottom)));
   box-sizing:border-box;
 }
-.hero__inner{
-  width:100%;
-  max-width:920px;
-  margin:0 auto;
-  padding-inline:0;     /* avoid double padding; container handles it */
-  text-align:center;
-}
-
 .hero::before{
   content:""; position:absolute; inset:0; pointer-events:none; z-index:0;
   background:
@@ -142,10 +133,54 @@ a:hover{opacity:.9}
 }
 @media (max-width:720px){ .hero::before{opacity:.28} }
 
-.hero__title{ color: var(--brand); }
-.eyebrow{color:var(--muted); text-transform:uppercase; letter-spacing:.18em; font-size:.8rem}
-.hero__tag{color:var(--muted); margin:.2rem 0 1.2rem}
-.hero__cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.hero__inner{
+  width:100%;
+  max-width:1100px;     /* align with .container */
+  margin:0 auto;
+  padding-inline:0;     /* container handles side padding */
+}
+
+.hero__grid{
+  display:grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr); /* text | image */
+  align-items:center;
+  gap:clamp(24px, 6vw, 56px);
+}
+
+.hero__copy{
+  min-width:0;
+  text-align:left;
+  justify-self:start;
+}
+.hero__title{ color:var(--brand); }
+.hero__tag, .hero__meta{ text-align:left; }
+.hero__cta{
+  display:flex; gap:12px; flex-wrap:wrap;
+  justify-content:flex-start; /* left-align buttons */
+}
+
+/* Right-side image */
+.hero__photo{
+  justify-self:end;       /* stick to right edge */
+  align-self:center;
+  max-width:min(40vw, 480px);
+}
+.hero__img{
+  display:block; width:100%; height:auto; object-fit:contain;
+  object-position: bottom right;
+  filter: drop-shadow(0 14px 48px rgba(0,0,0,.45));
+  transform: translateZ(0);
+}
+
+/* Mobile: stack and re-center */
+@media (max-width:900px){
+  .hero__grid{ grid-template-columns:1fr; }
+  .hero__copy{ text-align:center; justify-self:center; }
+  .hero__tag, .hero__meta{ text-align:center; }
+  .hero__cta{ justify-content:center; }
+  .hero__photo{ justify-self:center; max-width:min(68vw, 420px); margin-top:10px; }
+}
+
 
 /* Sections — centered, balanced spacing */
 .section{ position:relative; padding:72px 0; border-top:1px solid var(--border); }
@@ -198,7 +233,7 @@ a:hover{opacity:.9}
 
 /* Lists / tags */
 .list{margin:0; padding-left:18px}
-.stack-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.stack-tags{display:flex; flex-wrap:wrap; gap:13px; margin-top:10px}
 .stack-tags span{
   font-size:.85rem; color:#FFE38A; background:var(--brand-soft);
   border:1px solid var(--brand-soft-border); padding:6px 10px; border-radius:999px
@@ -210,7 +245,7 @@ a:hover{opacity:.9}
 .link-cta{border-bottom:1px dashed var(--brand)}
 
 /* Contact bar */
-.contact-bar{display:flex; gap:16px; justify-content:center}
+.contact-bar{display:flex; gap:16px; justify-content:left}
 .contact-bar a{padding:8px 12px; border-radius:999px; border:1px solid var(--border)}
 .contact-bar a:hover{background:rgba(255,255,255,.06)}
 
@@ -224,4 +259,132 @@ a:hover{opacity:.9}
   body::after{animation:none}
   .fade-in{transition:none; opacity:1; transform:none}
   .btn,.card{transition:none}
+}
+
+/* ---- Hero fine-tuning (desktop only) ---- */
+@media (min-width: 900px){
+  /* push the copy a little to the right */
+  .hero__copy{
+    margin-left: clamp(12px, 3vw, 64px);
+  }
+
+  /* give a bit more space between text and image */
+  .hero__grid{
+    gap: clamp(32px, 6vw, 72px);
+  }
+
+  /* enlarge the image so it occupies more of the hero */
+  .hero__photo{
+    max-width: min(52vw, 640px);   /* was ~40vw */
+    align-self: end;               /* sit a touch lower for balance */
+  }
+  .hero__img{
+    transform: translateZ(0) scale(1.85); /* tasteful zoom */
+
+  }
+}
+
+/* keep mobile behavior unchanged */
+@media (max-width: 899px){
+  .hero__copy{ margin-left: 0; }
+  .hero__photo{ max-width: min(68vw, 420px); }
+  .hero__img{ transform: translateZ(0) scale(1); }
+}
+
+/* utility: justify long paragraphs nicely */
+.justify{
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;                 /* smoother justification */
+}
+/* Contact buttons: rectangle, yellow background, black text + justified layout */
+.hero__copy .contact-bar,
+.section .contact-bar{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* spreads/justifies */
+  gap: 12px;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+.contact-bar a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border-radius: 12px;                /* rectangle (soft corners) */
+  background: var(--brand);           /* yellow */
+  color: #0A0C10;                     /* black text */
+  font-weight: 600;
+  border: 1px solid transparent;
+  text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset;
+  transition: transform .15s ease, filter .15s ease, box-shadow .2s ease;
+}
+.contact-bar a:hover{ filter: brightness(.97); transform: translateY(-1px); }
+.contact-bar a:active{ transform: translateY(0); }
+.contact-bar a:focus-visible{ outline: none; box-shadow: 0 0 0 3px rgba(255,204,0,.35); }
+
+/* Optional: keep them on one line (desktop) instead of filling the whole width
+@media (min-width: 900px){
+  .hero__copy .contact-bar{
+    grid-template-columns: repeat(4, max-content);
+    justify-content: flex-start;
+  }
+}
+*/
+/* Icon sizing + color inside yellow buttons */
+.contact-bar a{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:10px; font-weight:600;
+}
+.contact-bar a .ico{ width:18px; height:18px; color:#0A0C10; }          /* inline SVG uses currentColor */
+.contact-bar a .ico-img{ width:18px; height:18px; display:block; filter:brightness(0); } /* make SVG imgs black */
+
+/* --- Shuffling Card Deck --- */
+.card-deck{
+  position: relative;
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+  /* reserve height via JS; fallback so content doesn't jump */
+  min-height: 220px;
+}
+.card-deck .card{
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(760px, 100%);
+  transform: translate(-50%, 0);
+  will-change: transform, opacity;
+  transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .45s ease;
+  /* reuse your existing card visuals */
+  background: var(--card-gradient);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: none;
+}
+.card-deck .card:hover{ box-shadow: var(--shadow); border-color: rgba(255,204,0,.18); }
+
+/* show arrows */
+.deck-btn{
+  position: absolute;
+  bottom: -46px;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--brand); color:#0A0C10;
+  border: 0;
+  font-size: 20px; line-height: 1;
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: filter .15s ease, transform .15s ease;
+}
+.deck-btn:hover{ filter:brightness(.97); transform:translateY(-1px); }
+.deck-prev{ left: 0; }
+.deck-next{ right: 0; }
+
+/* responsive arrow position */
+@media (max-width:700px){
+  .deck-btn{ bottom: -40px; }
 }
