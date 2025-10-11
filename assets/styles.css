@@ -4,14 +4,14 @@
 
 /* Base */
 :root{
-  --bg:#0b0c0f; --card:#111318; --text:#e9edf3; --muted:#a8b0bc;
-  --brand:#FFCC00; --brand-hover:#E6B800;
+  --bg:#0b0c0f; --card:#111318; --text: #000000; --muted:#a8b0bc;
+  --brand: #000000; --brand-hover:#E6B800;
   --brand-grad-start:#FFD000; --brand-grad-end:#FFB300;
   --brand-soft:rgba(255,204,0,.10); --brand-soft-border:rgba(255,204,0,.25);
   --border:#1b1f27;
 
   /* dark gradients */
-  --ink-1:#0b0c0f; --ink-2:#0d1015; --ink-3:#0e1218; --ink-4:#0a0c12;
+  --ink-1: #ffffff; --ink-2: #e1e1e1; --ink-3: #bfbfbf; --ink-4: #b6b6b6;
   --bg-gradient:
     radial-gradient(1100px 520px at 12% -8%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 60%),
     radial-gradient(900px 420px at 110% 8%, rgba(255,255,255,.035) 0%, rgba(255,255,255,0) 58%),
@@ -396,3 +396,329 @@ a:hover{opacity:.9}
   padding:10px 14px; display:inline-flex; align-items:center; gap:8px;
 }
 .btn--github svg{ width:18px; height:18px; fill:#0A0C10; display:block; }
+
+/* ===========================
+   MONOCHROME OVERRIDES (B/W only)
+   Paste at the end of styles.css
+   =========================== */
+
+/* 1) Tokens: no color, only black/white/greys */
+:root{
+  --brand:#0A0C10;                       /* accent = near-black */
+  --brand-hover:#111111;
+  --brand-grad-start:#FFFFFF;             /* buttons: white → light grey */
+  --brand-grad-end:#E5E7EB;
+  --brand-soft:rgba(255,255,255,.08);     /* subtle white tint on dark */
+  --brand-soft-border:rgba(255,255,255,.22);
+  --link:#FFFFFF;                         /* links on dark bg */
+  --link-hover:#E5E7EB;
+}
+
+/* 2) Global theming to monochrome */
+a{ color:var(--link); text-decoration:none; border-bottom:1px dashed rgba(255,255,255,.35); }
+a:hover{ color:var(--link-hover); opacity:1; }
+
+/* Ambient drift: remove yellow tint */
+body::after{
+  background:
+    radial-gradient(28rem 20rem at var(--mx,70%) var(--my,10%), rgba(255,255,255,.055), transparent 60%),
+    radial-gradient(40rem 28rem at 20% 8%, rgba(255,255,255,.035), transparent 60%);
+}
+
+/* Header logo pill → grey gradient, black text */
+.logo{
+  background:linear-gradient(145deg,#FFFFFF,#E5E7EB);
+  color:#0A0C10;
+}
+
+/* Hero title should be white on dark background */
+.hero__title{ color:#FFFFFF; }
+
+/* Primary button becomes grey/white with black text */
+.btn--primary{
+  background:linear-gradient(180deg, var(--brand-grad-start), var(--brand-grad-end));
+  color:#0A0C10; border-color:transparent;
+}
+.btn--primary:hover{ filter:brightness(.96); }
+.btn--primary:focus-visible{ box-shadow:0 0 0 3px rgba(255,255,255,.35); }
+
+/* Contact buttons: rectangular white with black text */
+.hero__copy .contact-bar,
+.section .contact-bar{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px; align-items:stretch; justify-items:stretch;
+}
+.contact-bar a{
+  background:#FFFFFF; color:#0A0C10; border:1px solid #E5E7EB;
+  box-shadow:0 0 0 1px rgba(0,0,0,.06) inset;
+}
+.contact-bar a .ico{ color:#0A0C10; }
+.contact-bar a .ico-img{ filter:brightness(0); } /* force black icon */
+
+/* Cards stay dark; all accents → greys */
+.card{
+  background: linear-gradient(180deg, #171A1F, #0F1217);
+  border-color:#1F2430;
+}
+.card:hover{ border-color:rgba(255,255,255,.22); }
+
+/* Badges and stack tags → white-tinted greys */
+.badge{
+  color:#F3F4F6;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.22);
+}
+.stack-tags span{
+  color:#E5E7EB;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+}
+
+/* GitHub button (center) → white with black logo/text */
+.card__actions{ display:flex; justify-content:center; margin-top:10px; }
+.btn--github{
+  background:linear-gradient(180deg,#FFFFFF,#E5E7EB);
+  color:#0A0C10; border:1px solid #E5E7EB; border-radius:12px;
+  padding:10px 14px; display:inline-flex; align-items:center; gap:8px;
+}
+.btn--github svg{ fill:#0A0C10; }
+
+/* Focus states → neutral white halo on dark */
+.contact-bar a:focus-visible,
+.btn--github:focus-visible,
+.btn:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(255,255,255,.35); }
+
+/* Remove any leftover tinted pieces */
+.link-cta{ border-bottom-color:#FFFFFF; }
+.eyebrow, .hero__tag{ color:#AEB4BE; }    /* neutral grey subtext */
+
+/* ===========================
+   BLACK CANVAS / GREY CARDS / WHITE BUTTONS
+   (Paste at end of styles.css)
+   =========================== */
+
+/* 1) Global palette */
+:root{
+  --bg:#000000;
+  --text:#F2F3F5;
+  --muted:#A0A6AF;
+
+  --card:#141414;                 /* dark grey cards */
+  --border:#242424;
+
+  /* keep gradients but make them effectively black */
+  --ink-1:#000000; --ink-2:#000000; --ink-3:#000000; --ink-4:#000000;
+  --bg-gradient: linear-gradient(180deg, #000 0%, #000 100%);
+
+  /* buttons use white */
+  --brand-grad-start:#FFFFFF;
+  --brand-grad-end:#E9EAEC;
+}
+
+/* 2) Base colors */
+body{
+  background-color:#000;
+  background-image:var(--bg-gradient);
+  color:var(--text);
+}
+a{ color:#FFFFFF; text-decoration:none; border-bottom:1px dashed rgba(255,255,255,.35); }
+a:hover{ color:#E5E7EB; opacity:1; }
+
+/* remove any old yellow glow */
+body::after{
+  background:
+    radial-gradient(28rem 20rem at var(--mx,70%) var(--my,10%), rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(40rem 28rem at 20% 8%, rgba(255,255,255,.04), transparent 60%);
+}
+
+/* 3) Header / nav on black */
+.site-header.visible{
+  background:rgba(0,0,0,.8);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  background:linear-gradient(180deg, #FFF, #E9EAEC);
+  color:#000;
+}
+
+/* 4) Hero text stays light on black */
+.hero__title{ color:#FFFFFF; }
+.eyebrow, .hero__tag{ color:#AEB4BE; }
+
+/* 5) Cards = dark grey, subtle hover */
+.card{
+  background: linear-gradient(180deg, #171717, #0F0F0F);
+  border:1px solid var(--border);
+}
+.card:hover{ border-color:#2E2E2E; box-shadow:none; }
+
+/* Badges & tags = neutral greys */
+.badge{
+  color:#E5E7EB;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.22);
+}
+.stack-tags span{
+  color:#E5E7EB;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+}
+
+/* 6) Buttons: WHITE with BLACK text (all buttons) */
+.btn,
+.btn--primary,
+.contact-bar a,
+.btn--github{
+  background: linear-gradient(180deg, var(--brand-grad-start), var(--brand-grad-end));
+  color:#000 !important;
+  border:1px solid #E5E7EB;
+  border-radius:12px;
+}
+.btn:hover,
+.btn--primary:hover,
+.contact-bar a:hover,
+.btn--github:hover{ filter:brightness(.96); transform:translateY(-1px); }
+
+.btn:focus-visible,
+.btn--primary:focus-visible,
+.contact-bar a:focus-visible,
+.btn--github:focus-visible{
+  outline:none; box-shadow:0 0 0 3px rgba(255,255,255,.28);
+}
+
+/* GitHub icon black on white button */
+.btn--github svg{ fill:#000; }
+
+/* 7) Nav pills and contact-bar borders neutral */
+.pill{ border:1px solid var(--border); }
+.contact-bar a{ box-shadow:0 0 0 1px rgba(0,0,0,.06) inset; }
+
+/* 8) Link accents inside cards */
+.link-cta{ border-bottom:1px dashed #FFFFFF; }
+/* ===========================
+   LIGHT THEME OVERRIDES (B/W only)
+   Paste at end of styles.css
+   =========================== */
+
+/* Tokens */
+:root{
+  --bg:#F7F8FA;                 /* page background */
+  --text:#0B0C10;               /* main text */
+  --muted:#4B5563;              /* subtext */
+
+  --card:#FFFFFF;               /* cards */
+  --border:#E5E7EB;             /* borders on light */
+
+  /* light background gradient */
+  --ink-1:#FFFFFF; --ink-2:#FAFAFA; --ink-3:#F5F6F8; --ink-4:#EEF1F5;
+  --bg-gradient:
+    radial-gradient(1000px 420px at 12% -8%, rgba(0,0,0,.03) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(900px 360px at 110% 8%, rgba(0,0,0,.025) 0%, rgba(0,0,0,0) 58%),
+    linear-gradient(180deg, var(--ink-1) 0%, var(--ink-4) 100%);
+
+  /* buttons are white with subtle depth */
+  --brand-grad-start:#FFFFFF;
+  --brand-grad-end:#F1F3F6;
+}
+
+/* Canvas + links */
+body{
+  background-color:var(--bg);
+  background-image:var(--bg-gradient);
+  color:var(--text);
+}
+a{
+  color:#0B0C10;
+  text-decoration:none;
+  border-bottom:1px dashed rgba(0,0,0,.35);
+}
+a:hover{ opacity:1; color:#111; }
+
+/* Remove yellow glow */
+body::after{
+  background:
+    radial-gradient(28rem 20rem at var(--mx,70%) var(--my,10%), rgba(0,0,0,.05), transparent 60%),
+    radial-gradient(40rem 28rem at 20% 8%, rgba(0,0,0,.035), transparent 60%);
+  mix-blend-mode:normal;
+}
+
+/* Header on light */
+.site-header.visible{
+  backdrop-filter: blur(10px);
+  background:rgba(255,255,255,.85);
+  border-bottom:1px solid var(--border);
+}
+.nav__list a:hover{ background:rgba(0,0,0,.04); }
+.logo{
+  background:linear-gradient(180deg,#FFFFFF,#F1F3F6);
+  color:#0B0C10;
+  border:1px solid var(--border);
+}
+
+/* Hero text */
+.hero__title{ color:#0B0C10; }
+.eyebrow,.hero__tag{ color:var(--muted); }
+
+/* Cards (white, soft shadow on hover) */
+.card{
+  background:#FFFFFF;
+  border:1px solid var(--border);
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+.card:hover{
+  border-color:#D1D5DB;
+  box-shadow:0 10px 28px rgba(0,0,0,.08);
+}
+
+/* Badges & tags (neutral greys) */
+.badge{
+  color:#111;
+  background:#F5F6F8;
+  border:1px solid var(--border);
+}
+.stack-tags span{
+  color:#111;
+  background:#F7F8FA;
+  border:1px solid var(--border);
+}
+
+/* Buttons: WHITE with BLACK text everywhere */
+.btn,
+.btn--primary,
+.contact-bar a,
+.btn--github{
+  background:linear-gradient(180deg, var(--brand-grad-start), var(--brand-grad-end));
+  color:#000 !important;
+  border:1px solid #E5E7EB;
+  border-radius:12px;
+}
+.btn:hover,
+.btn--primary:hover,
+.contact-bar a:hover,
+.btn--github:hover{ filter:brightness(.98); transform:translateY(-1px); }
+.btn:focus-visible,
+.btn--primary:focus-visible,
+.contact-bar a:focus-visible,
+.btn--github:focus-visible{ outline:none; box-shadow:0 0 0 3px rgba(0,0,0,.2); }
+
+/* GitHub button icon stays black */
+.btn--github svg{ fill:#000; }
+
+/* Contact bar spacing stays grid; keep monochrome icons */
+.contact-bar a .ico{ color:#000; }
+.contact-bar a .ico-img{ filter:brightness(0); }
+
+/* Section divider vignette (lighter) */
+.section::before{
+  background:radial-gradient(600px 120px at 50% 0, rgba(0,0,0,.06), transparent 70%);
+}
+
+/* Optional: lighten the hero’s radial wash on light */
+.hero::before{
+  background:
+    radial-gradient(1100px 480px at 50% -16%, rgba(0,0,0,.04), transparent 65%),
+    radial-gradient(900px 360px at 100% 0%, rgba(0,0,0,.03), transparent 60%);
+  opacity:.55;
+}
+@media (max-width:720px){ .hero::before{ opacity:.35; } }
+
