@@ -45,10 +45,6 @@
   .hero-canvas-container {
     height: 80vh;
   }
-
-  .hero-canvas-container.hidden {
-    display: none;
-  }
 }
 
 @media only screen and (max-width: 500px) {

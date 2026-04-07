@@ -29,7 +29,7 @@ const App = () => {
     const handleScroll = () => {
       // Adjust threshold based on device width
       const isMobile = window.innerWidth < 768;
-      const scrollThreshold = isMobile ? window.innerHeight * 1.2 : window.innerHeight * 1.8; // Hide canvas earlier on mobile
+      const scrollThreshold = isMobile ? window.innerHeight * 2.5 : window.innerHeight * 1.8; // Show animation longer on mobile
 
       // Update canvas visibility
       if (canvasContainerRef.current) {
