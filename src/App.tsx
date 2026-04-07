@@ -10,13 +10,21 @@ const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const [currentFrame, setCurrentFrame] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const imagesRef = useRef<{ [key: number]: HTMLImageElement }>({});
 
   // Preload all frames
   useEffect(() => {
     const loadFrames = async () => {
+      let loadedCount = 0;
       for (let i = 1; i <= TOTAL_FRAMES; i++) {
         const img = new Image();
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === TOTAL_FRAMES) {
+            setImagesLoaded(true);
+          }
+        };
         img.src = `/frames/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
         imagesRef.current[i - 1] = img;
       }
@@ -29,10 +37,10 @@ const App = () => {
     const handleScroll = () => {
       // Adjust threshold based on device width
       const isMobile = window.innerWidth < 768;
-      const scrollThreshold = isMobile ? window.innerHeight * 2.5 : window.innerHeight * 1.8; // Show animation longer on mobile
+      const scrollThreshold = isMobile ? window.innerHeight * 2.5 : window.innerHeight * 1.8;
 
-      // Update canvas visibility
-      if (canvasContainerRef.current) {
+      // Update canvas visibility - only hide after threshold
+      if (canvasContainerRef.current && imagesLoaded) {
         if (window.scrollY > scrollThreshold) {
           canvasContainerRef.current.classList.add("hidden");
         } else {
@@ -40,8 +48,8 @@ const App = () => {
         }
       }
 
-      // Only animate canvas until threshold
-      if (window.scrollY < scrollThreshold) {
+      // Animate canvas - map scroll to frame
+      if (imagesLoaded && window.scrollY < scrollThreshold) {
         const scrollProgress = scrollThreshold > 0 ? window.scrollY / scrollThreshold : 0;
         const frameIndex = Math.min(
           Math.floor(scrollProgress * TOTAL_FRAMES),
@@ -51,14 +59,16 @@ const App = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    if (imagesLoaded) {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+  }, [imagesLoaded]);
 
   // Draw current frame on canvas
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !imagesLoaded) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -72,7 +82,7 @@ const App = () => {
       }
       ctx.drawImage(img, 0, 0);
     }
-  }, [currentFrame]);
+  }, [currentFrame, imagesLoaded]);
 
   return (
     <>
