@@ -28,17 +28,39 @@ const App = () => {
     }
   };
 
-  // Preload all frames - draw frame 0 immediately when it loads
+  // Preload all frames
   useEffect(() => {
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
-      img.onload = () => {
-        // Draw first frame immediately so hero isn't black
-        if (i === 1) drawFrame(0);
-      };
       img.src = `/frames/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
       imagesRef.current[i - 1] = img;
     }
+
+    // Keep trying to draw frame 0 until the canvas is ready
+    const tryDrawFirstFrame = () => {
+      const canvas = canvasRef.current;
+      const img = imagesRef.current[0];
+      if (canvas && img && img.complete) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // Retry every 50ms until first frame is drawn
+    const interval = setInterval(() => {
+      if (tryDrawFirstFrame()) clearInterval(interval);
+    }, 50);
+
+    // Safety cleanup after 5s
+    setTimeout(() => clearInterval(interval), 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Handle scroll to update frame
