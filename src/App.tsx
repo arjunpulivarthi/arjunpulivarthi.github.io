@@ -1,42 +1,74 @@
-import { lazy, Suspense, useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import "./App.css";
 
 const MainContainer = lazy(() => import("./components/MainContainer"));
 import { LoadingProvider } from "./context/LoadingProvider";
 
-const App = () => {
-  const portraitRef = useRef<HTMLDivElement>(null);
+const TOTAL_FRAMES = 120;
 
+const App = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [currentFrame, setCurrentFrame] = useState(0);
+  const imagesRef = useRef<{ [key: number]: HTMLImageElement }>({});
+
+  // Preload all frames
+  useEffect(() => {
+    const loadFrames = async () => {
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        img.src = `/frames/ezgif-frame-${String(i).padStart(3, "0")}.jpg`;
+        imagesRef.current[i - 1] = img;
+      }
+    };
+    loadFrames();
+  }, []);
+
+  // Handle scroll to update frame
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const portraitEl = portraitRef.current;
-      if (portraitEl) {
-        if (scrollY > 100) {
-          portraitEl.classList.add("scrolled");
-        } else {
-          portraitEl.classList.remove("scrolled");
-        }
-
-        // Parallax effect - move slower than page scroll
-        const parallaxOffset = scrollY * 0.5;
-        portraitEl.style.transform = `translateX(-50%) translateY(${parallaxOffset}px)`;
-      }
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+      const frameIndex = Math.min(
+        Math.floor(scrollProgress * TOTAL_FRAMES),
+        TOTAL_FRAMES - 1
+      );
+      setCurrentFrame(frameIndex);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Draw current frame on canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const img = imagesRef.current[currentFrame];
+    if (img && img.complete) {
+      // Set canvas size to match image
+      if (canvas.width !== img.width || canvas.height !== img.height) {
+        canvas.width = img.width;
+        canvas.height = img.height;
+      }
+      ctx.drawImage(img, 0, 0);
+    }
+  }, [currentFrame]);
+
   return (
     <>
       <LoadingProvider>
         <Suspense>
           <MainContainer>
-            <div className="hero-portrait" ref={portraitRef}>
-              <img
-                src="/images/arjun-portrait.webp"
-                alt="Arjun Pulivarthi"
+            <div className="hero-canvas-container">
+              <canvas
+                ref={canvasRef}
+                className="hero-canvas"
+                width={1920}
+                height={1080}
               />
             </div>
           </MainContainer>
