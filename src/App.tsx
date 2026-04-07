@@ -8,6 +8,7 @@ const TOTAL_FRAMES = 120;
 
 const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
   const [currentFrame, setCurrentFrame] = useState(0);
   const imagesRef = useRef<{ [key: number]: HTMLImageElement }>({});
 
@@ -26,13 +27,26 @@ const App = () => {
   // Handle scroll to update frame
   useEffect(() => {
     const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-      const frameIndex = Math.min(
-        Math.floor(scrollProgress * TOTAL_FRAMES),
-        TOTAL_FRAMES - 1
-      );
-      setCurrentFrame(frameIndex);
+      const scrollThreshold = window.innerHeight * 1.8; // Hide canvas at ~1.8 viewport heights
+
+      // Update canvas visibility
+      if (canvasContainerRef.current) {
+        if (window.scrollY > scrollThreshold) {
+          canvasContainerRef.current.classList.add("hidden");
+        } else {
+          canvasContainerRef.current.classList.remove("hidden");
+        }
+      }
+
+      // Only animate canvas until threshold
+      if (window.scrollY < scrollThreshold) {
+        const scrollProgress = scrollThreshold > 0 ? window.scrollY / scrollThreshold : 0;
+        const frameIndex = Math.min(
+          Math.floor(scrollProgress * TOTAL_FRAMES),
+          TOTAL_FRAMES - 1
+        );
+        setCurrentFrame(frameIndex);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -63,7 +77,7 @@ const App = () => {
       <LoadingProvider>
         <Suspense>
           <MainContainer>
-            <div className="hero-canvas-container">
+            <div className="hero-canvas-container" ref={canvasContainerRef}>
               <canvas
                 ref={canvasRef}
                 className="hero-canvas"
