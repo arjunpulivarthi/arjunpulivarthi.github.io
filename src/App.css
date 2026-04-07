@@ -28,31 +28,7 @@
   display: block;
 }
 
-@media only screen and (max-width: 1024px) {
-  .hero-canvas-container {
-    position: relative;
-    height: 100vh;
-    left: 0;
-    transform: none;
-  }
-  .hero-canvas {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .hero-canvas-container {
-    height: 80vh;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .hero-canvas-container {
-    height: 60vh;
-    min-height: 400px;
-  }
-}
+/* Canvas stays position:fixed on ALL screen sizes as a background layer */
 
 .section-container {
   width: 1300px;
