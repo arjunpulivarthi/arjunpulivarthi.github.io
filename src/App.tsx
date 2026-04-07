@@ -36,30 +36,30 @@ const App = () => {
       imagesRef.current[i - 1] = img;
     }
 
-    // Keep trying to draw frame 0 until the canvas is ready
+    // Keep trying to draw frame 0 until canvas is ready, then fade in
     const tryDrawFirstFrame = () => {
       const canvas = canvasRef.current;
+      const container = canvasContainerRef.current;
       const img = imagesRef.current[0];
-      if (canvas && img && img.complete) {
+      if (canvas && img && img.complete && container) {
         const ctx = canvas.getContext("2d");
         if (ctx) {
           canvas.width = img.width;
           canvas.height = img.height;
           ctx.drawImage(img, 0, 0);
+          // Smooth fade-in
+          requestAnimationFrame(() => container.classList.add("visible"));
           return true;
         }
       }
       return false;
     };
 
-    // Retry every 50ms until first frame is drawn
     const interval = setInterval(() => {
       if (tryDrawFirstFrame()) clearInterval(interval);
     }, 50);
 
-    // Safety cleanup after 5s
     setTimeout(() => clearInterval(interval), 5000);
-
     return () => clearInterval(interval);
   }, []);
 
