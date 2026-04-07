@@ -27,7 +27,9 @@ const App = () => {
   // Handle scroll to update frame
   useEffect(() => {
     const handleScroll = () => {
-      const scrollThreshold = window.innerHeight * 1.8; // Hide canvas at ~1.8 viewport heights
+      // Adjust threshold based on device width
+      const isMobile = window.innerWidth < 768;
+      const scrollThreshold = isMobile ? window.innerHeight * 1.2 : window.innerHeight * 1.8; // Hide canvas earlier on mobile
 
       // Update canvas visibility
       if (canvasContainerRef.current) {

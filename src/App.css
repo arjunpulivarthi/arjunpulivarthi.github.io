@@ -31,13 +31,30 @@
 @media only screen and (max-width: 1024px) {
   .hero-canvas-container {
     position: relative;
-    height: auto;
+    height: 100vh;
     left: 0;
     transform: none;
   }
   .hero-canvas {
     width: 100%;
-    height: auto;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hero-canvas-container {
+    height: 80vh;
+  }
+
+  .hero-canvas-container.hidden {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .hero-canvas-container {
+    height: 60vh;
+    min-height: 400px;
   }
 }
 
