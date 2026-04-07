@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["-c", "cd /Volumes/Brodie/arjunportfolio && export PATH=/usr/local/bin:$PATH && npx vite --host"],
+      "port": 5173,
+      "autoPort": true
+    }
+  ]
+}

@@ -1,3 +1,70 @@
+/* Hero portrait image - replaces 3D character */
+.hero-portrait {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.hero-portrait img {
+  width: auto;
+  height: 95vh;
+  object-fit: contain;
+  object-position: bottom center;
+  mask-image: linear-gradient(to top, transparent 0%, black 15%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+  animation: portraitSlideUp 0.8s ease-out forwards;
+}
+
+/* Scroll-based effects */
+@keyframes portraitSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Parallax effect on scroll - portrait moves slower */
+.hero-portrait.scrolled {
+  opacity: 0.7;
+}
+
+.hero-portrait.scrolled img {
+  transform: scale(0.95) translateY(20px);
+}
+
+@media only screen and (max-width: 1024px) {
+  .hero-portrait {
+    position: relative;
+    height: auto;
+    left: 0;
+    transform: none;
+  }
+  .hero-portrait img {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+  }
+  .hero-portrait.scrolled {
+    opacity: 1;
+  }
+  .hero-portrait.scrolled img {
+    transform: scale(1) translateY(0);
+  }
+}
+
 .section-container {
   width: 1300px;
 }
