@@ -26,8 +26,8 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   };
 
   useEffect(() => {
-    // Complete loading quickly since we no longer have character loading
-    const timer = setTimeout(() => setLoading(100), 100);
+    // Simulate loading completion since we no longer have character loading
+    const timer = setTimeout(() => setLoading(100), 500);
     return () => clearTimeout(timer);
   }, []);
 
