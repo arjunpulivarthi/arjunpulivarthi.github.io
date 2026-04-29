@@ -1,72 +1,130 @@
-import { useState, useCallback } from "react";
 import "./styles/Work.css";
-import WorkImage from "./WorkImage";
-import { MdArrowBack, MdArrowForward } from "react-icons/md";
+import { FaGithub } from "react-icons/fa6";
 
 const projects = [
   {
-    title: "UniGrid",
-    category: "RFID-Enabled Smart Student ID & Payment System",
-    tools: "Flask, MongoDB, Razorpay, Twilio, NFC/RFID, ERP Integration",
-    image: "/images/unigrid.png",
+    title:
+      "Semantic Similarity Based Academic Answer Evaluator using ML and BI",
+    category: "Capstone Project — Team Size: 4",
+    tools:
+      "Python, NLTK, spaCy, Scikit-learn, TensorFlow, SBERT, Streamlit, Power BI",
+    image: "/images/preview1.png",
     link: "https://github.com/arjunpulivarthi",
   },
   {
-    title: "Sakhi Samriddhi",
-    category: "AI-Based Menstrual Health Prediction & Chatbot",
-    tools: "TensorFlow, Dialogflow, Flask, Bootstrap | KLE GirlGeekHack 2023 - 1st Place",
-    image: "/images/sakhi.png",
+    title: "Federated GenAI for Banking Privacy",
+    category: "Course Minor Project — Team Size: 1",
+    tools:
+      "Python, Scikit-learn, Federated Learning (FedAvg), JavaScript, HTML/CSS",
+    image: "/images/bond.png",
     link: "https://github.com/arjunpulivarthi",
   },
   {
-    title: "AI Defect Detection in Polymer Welding",
-    category: "Advanced Image Processing for NDE 4.0",
-    tools: "OpenCV, Scikit-learn, GLCM Texture Analysis | 93% Accuracy | Research Published",
-    image: "/images/defect.png",
+    title: "AI Traffic Signal Management",
+    category: "Course Minor Project — Team Size: 2",
+    tools: "Python, Kubernetes, GCP, Pandas, NumPy, Matplotlib, JSON",
+    image: "/images/callhq.png",
     link: "https://github.com/arjunpulivarthi",
   },
   {
-    title: "Network Threat Identifier Using AI",
-    category: "Real-Time Intrusion Detection System",
-    tools: "CNN, Scapy, Flask, MongoDB, Kafka | PES University Cybersecurity Hackathon - 5th Place",
-    image: "/images/threat.png",
+    title: "Stock Market Price Predictor",
+    category: "Course Minor Project — Team Size: 1",
+    tools: "Python, Pandas, Scikit-learn, XGBoost, LSTM, Streamlit",
+    image: "/images/sapphire.png",
     link: "https://github.com/arjunpulivarthi",
   },
   {
-    title: "Urban Forge Solutions",
-    category: "AI Toolkit for Smart Urban Planning",
-    tools: "OpenCV, Flask, Google Maps API, Dialogflow | RV Hack4Soc 2.0 - Innovation Recognition",
-    image: "/images/urban.png",
+    title: "AI-Based Defect Detection in Ultrasonic Polymer Welding",
+    category: "Course Minor Project — Team Size: 4",
+    tools:
+      "Python, OpenCV, NumPy, Scikit-learn, Matplotlib | 93% classification accuracy | NDE 4.0 research",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Deepfake Detection Software Using Deep Learning",
+    category: "Personal Project — Team Size: 1",
+    tools:
+      "Python, TensorFlow, Keras, OpenCV, Flask, PIL, Matplotlib",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Network Threat Identifier",
+    category:
+      "Hackathon Project — PES University AI/ML in Cybersecurity 2025 — 5th Place — Team Size: 4",
+    tools:
+      "Python, Flask, Scapy, MongoDB, TensorFlow, CNN, Apache Kafka",
+    image: "/images/orrdr.png",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Gesture Articulation and Recognition",
+    category: "Personal Project — Team Size: 1",
+    tools: "Python, OpenCV, MediaPipe, NumPy, TensorFlow",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Urban Forge Solutions - AI Toolkit for Urban Planning",
+    category:
+      "Hackathon Project — RV Hack4Soc 2.0 — Recognized for Innovation — Team Size: 4",
+    tools:
+      "Python, Flask, OpenCV, Scikit-learn, Google Maps API, JavaScript, HTML/CSS, Dialogflow",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "IoT-Based AI Farming System",
+    category:
+      "Hackathon Project — Reva Smart Agro Hackathon 2023 — 3rd Place — Team Size: 4",
+    tools:
+      "Python, Arduino, TensorFlow, Firebase, Dialogflow, OpenWeatherMap API, IoT Sensors",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Virtual Meeting Analysis Platform",
+    category: "Hackathon Project — NIT Surathkal — Team Size: 4",
+    tools:
+      "Python, Flask, HatBERT, NLTK, WebSockets, HTML, CSS, JavaScript, REST APIs, Google Cloud, Kaggle",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title:
+      "Sakhi Samriddhi – AI-Based Menstrual Health Prediction and Chatbot System",
+    category:
+      "Hackathon Project — KLE GirlGeekHack 2023 — 1st Place — Team Size: 4",
+    tools: "Python, TensorFlow, Flask, Dialogflow, HTML/CSS, Bootstrap",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Cafe Management System",
+    category: "Debut Project — GUI-Based Billing and Order Application",
+    tools: "Desktop Application Development",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "Timetable Maker",
+    category: "Debut Project — Automated Class Schedule Generator",
+    tools: "Automation Logic and Scheduling",
+    image: "/images/placeholder.webp",
+    link: "https://github.com/arjunpulivarthi",
+  },
+  {
+    title: "AI IPL Win Predictor",
+    category:
+      "Freelance Project — Real-Time Cricket Match Outcome Forecasting — Jan 2025",
+    tools: "Python, Pandas, Scikit-learn, Streamlit, Matplotlib",
+    image: "/images/placeholder.webp",
     link: "https://github.com/arjunpulivarthi",
   },
 ];
 
 const Work = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  const goToSlide = useCallback(
-    (index: number) => {
-      if (isAnimating) return;
-      setIsAnimating(true);
-      setCurrentIndex(index);
-      setTimeout(() => setIsAnimating(false), 500);
-    },
-    [isAnimating]
-  );
-
-  const goToPrev = useCallback(() => {
-    const newIndex =
-      currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
-    goToSlide(newIndex);
-  }, [currentIndex, goToSlide]);
-
-  const goToNext = useCallback(() => {
-    const newIndex =
-      currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
-    goToSlide(newIndex);
-  }, [currentIndex, goToSlide]);
-
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
@@ -74,77 +132,43 @@ const Work = () => {
           My <span>Work</span>
         </h2>
 
-        <div className="carousel-wrapper">
-          {/* Navigation Arrows */}
-          <button
-            className="carousel-arrow carousel-arrow-left"
-            onClick={goToPrev}
-            aria-label="Previous project"
-            data-cursor="disable"
-          >
-            <MdArrowBack />
-          </button>
-          <button
-            className="carousel-arrow carousel-arrow-right"
-            onClick={goToNext}
-            aria-label="Next project"
-            data-cursor="disable"
-          >
-            <MdArrowForward />
-          </button>
-
-          {/* Slides */}
-          <div className="carousel-track-container">
-            <div
-              className="carousel-track"
-              style={{
-                transform: `translateX(-${currentIndex * 100}%)`,
-              }}
-            >
-              {projects.map((project, index) => (
-                <div className="carousel-slide" key={index}>
-                  <div className="carousel-content">
-                    <div className="carousel-info">
-                      <div className="carousel-number">
-                        <h3>0{index + 1}</h3>
-                      </div>
-                      <div className="carousel-details">
-                        <h4>{project.title}</h4>
-                        <p className="carousel-category">
-                          {project.category}
-                        </p>
-                        <div className="carousel-tools">
-                          <span className="tools-label">Tools & Features</span>
-                          <p>{project.tools}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="carousel-image-wrapper">
-                      <WorkImage
-                        image={project.image}
-                        alt={project.title}
-                        link={project.link}
-                      />
-                    </div>
-                  </div>
+        <div className="work-list">
+          {projects.map((project, index) => {
+            const reversed = index % 2 === 1;
+            return (
+              <article
+                className={`work-row ${reversed ? "work-row-reverse" : ""}`}
+                key={project.title}
+              >
+                <div className="work-info">
+                  <p className="work-number">0{index + 1}</p>
+                  <h3>{project.title}</h3>
+                  <p className="work-category">{project.category}</p>
+                  <p className="work-tools">{project.tools}</p>
+                  <a
+                    className="work-github-btn"
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-cursor="disable"
+                  >
+                    <FaGithub />
+                    View on GitHub
+                  </a>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Dot Indicators */}
-          <div className="carousel-dots">
-            {projects.map((_, index) => (
-              <button
-                key={index}
-                className={`carousel-dot ${index === currentIndex ? "carousel-dot-active" : ""
-                  }`}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to project ${index + 1}`}
-                data-cursor="disable"
-              />
-            ))}
-          </div>
+                <a
+                  className="work-image-wrap"
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor="disable"
+                >
+                  <img src={project.image} alt={project.title} />
+                </a>
+              </article>
+            );
+          })}
         </div>
       </div>
     </div>

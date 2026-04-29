@@ -63,13 +63,14 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Handle scroll to update frame
+  // Restore background scroll animation while keeping text animations disabled.
   useEffect(() => {
     const handleScroll = () => {
       const isMobile = window.innerWidth < 768;
-      const scrollThreshold = isMobile ? window.innerHeight * 2.5 : window.innerHeight * 1.8;
+      const scrollThreshold = isMobile
+        ? window.innerHeight * 2.5
+        : window.innerHeight * 1.8;
 
-      // Update canvas visibility - only hide after threshold
       if (canvasContainerRef.current) {
         if (window.scrollY > scrollThreshold) {
           canvasContainerRef.current.classList.add("hidden");
@@ -78,7 +79,6 @@ const App = () => {
         }
       }
 
-      // Animate canvas - map scroll to frame
       if (window.scrollY <= scrollThreshold) {
         const scrollProgress = window.scrollY / scrollThreshold;
         const frameIndex = Math.min(

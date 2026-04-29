@@ -56,17 +56,24 @@
   font-size: 15px;
   line-height: 15px;
   font-weight: 600;
-  color: #5e5e5e;
+  color: #d8e6ef;
+  border: 1px solid rgba(200, 91, 54, 0.4);
+  background: rgba(10, 18, 30, 0.72);
+  border-radius: 999px;
+  padding: 10px 16px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: 0.5s;
   transform-origin: left bottom;
   transform: translateX(100%) rotateZ(-90deg);
 }
 .resume-button:hover {
-  color: #fff;
+  color: #03111a;
+  background: var(--accentColor);
+  border-color: var(--accentColor);
 }
 div.resume-button span {
-  color: #fff;
+  color: inherit;
   font-size: 17px;
   margin-top: -1px;
   display: flex;

@@ -8,7 +8,7 @@
   opacity: 1;
   height: auto;
   margin: auto;
-  margin-bottom: 250px;
+  margin-bottom: 80px;
   padding: 120px 0px;
 }
 
@@ -17,7 +17,7 @@
   line-height: 70px;
   font-weight: 400;
   text-align: center;
-  background: linear-gradient(0deg, #0d9488, #ffffff);
+  background: linear-gradient(0deg, #8d3a26, #ffffff);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -27,7 +27,7 @@
 }
 
 .career-section h2>span {
-  font-family: "Geist", sans-serif;
+  font-family: "Sora", sans-serif;
   font-weight: 300;
 }
 
@@ -49,20 +49,34 @@
   font-size: 18px;
   font-weight: 300;
   margin: 0;
+  text-align: justify;
 }
 
 .career-info-in {
-  display: flex;
-  width: 40%;
-  justify-content: space-between;
-  gap: 50px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 46%;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.career-period {
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+  white-space: normal !important;
+  margin: 0;
 }
 
 .career-info h3 {
-  font-size: 48px;
+  font-size: 22px;
   margin: 0;
   font-weight: 500;
-  line-height: 45px;
+  line-height: 1.2;
+  white-space: normal;
+  min-width: 0;
+  word-break: keep-all;
+  max-width: none;
+  text-align: left;
 }
 
 .career-info h4 {
@@ -90,7 +104,7 @@
   width: 3px;
   height: 100%;
   background-image: linear-gradient(to top,
-      #14b8a6 20%,
+      #9a3f2a 20%,
       var(--accentColor) 50%,
       transparent 95%);
   max-height: 0%;
@@ -101,13 +115,13 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 50%);
-  background-color: #14b8a6;
+  background-color: #9a3f2a;
   width: 10px;
   height: 10px;
   border-radius: 50px;
-  box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 8px #5eead4,
-    0px 0px 110px 20px #a5f3fc;
-  animation: timeline 0.8s linear infinite forwards;
+  box-shadow: 0px 0px 5px 2px #d8907a, 0px 0px 15px 8px #c85b36,
+    0px 0px 110px 20px #f3c1ae;
+  animation: none;
 }
 
 @keyframes timeline {
@@ -117,7 +131,7 @@
   50%,
   70%,
   90% {
-    box-shadow: 0px 0px 5px 2px #67e8f9;
+    box-shadow: 0px 0px 5px 2px #d8907a;
   }
 
   10%,
@@ -126,19 +140,19 @@
   100%,
   64%,
   80% {
-    box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 5px #5eead4,
-      0px 0px 110px 20px #a5f3fc;
+    box-shadow: 0px 0px 5px 2px #d8907a, 0px 0px 15px 5px #c85b36,
+      0px 0px 110px 20px #f3c1ae;
   }
 }
 
 @keyframes timeline2 {
   0% {
-    box-shadow: 0px 0px 5px 2px #67e8f9;
+    box-shadow: 0px 0px 5px 2px #d8907a;
   }
 
   100% {
-    box-shadow: 0px 0px 5px 2px #67e8f9, 0px 0px 15px 5px #5eead4,
-      0px 0px 110px 20px #a5f3fc;
+    box-shadow: 0px 0px 5px 2px #d8907a, 0px 0px 15px 5px #c85b36,
+      0px 0px 110px 20px #f3c1ae;
   }
 }
 

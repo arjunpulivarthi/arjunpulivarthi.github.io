@@ -6,7 +6,7 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          I'm a CS undergraduate at Dayananda Sagar University specializing in AI/ML, with proven expertise in building real-world applications across financial forecasting, cybersecurity, and IoT-based solutions. Co-founder of UniGrid, an RFID-enabled smart campus payment system. I combine deep technical expertise in Python, ML frameworks, and full-stack development with entrepreneurial drive, demonstrated through multiple hackathon wins and client-facing prototypes that solve impactful problems.
+          Highly motivated and solutions-driven Computer Science undergraduate specializing in Artificial Intelligence and Machine Learning. Proven expertise in building real-world applications across financial forecasting, cybersecurity, recommendation systems, and IoT-based payment solutions. Co-founder and engineering lead with hands-on experience in Python, Flask, SQL, ML libraries, Explainable AI (XAI), time-series modeling, and NLP. Focused on solving impactful problems through innovation, with a strong portfolio of hackathon-winning projects and client-facing prototypes.
         </p>
       </div>
     </div>

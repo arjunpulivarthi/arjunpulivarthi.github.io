@@ -24,17 +24,12 @@ const Loading = ({ percent }: { percent: number }) => {
   }, [percent]);
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 900);
-      }
-    });
+    if (isLoaded) {
+      setClicked(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 250);
+    }
   }, [isLoaded]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {

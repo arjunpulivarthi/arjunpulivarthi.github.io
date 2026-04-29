@@ -90,16 +90,16 @@ const WhatIDo = () => {
               <h3>AI & MACHINE LEARNING</h3>
               <h4>Intelligent Systems & Data-Driven Solutions</h4>
               <p>
-                Building intelligent systems that solve real-world problems. From ML models for forecasting and classification to deep learning for vision and NLP—creating solutions that drive measurable impact.
+                Building production-ready AI systems for grading, forecasting, cybersecurity, explainability, and analytics. From SBERT semantic evaluation to federated learning and traffic optimization, each solution is designed for measurable, real-world outcomes.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Python &amp; TensorFlow</div>
+                <div className="what-tags">SBERT, Scikit-learn &amp; TensorFlow</div>
+                <div className="what-tags">Federated Learning (FedAvg)</div>
+                <div className="what-tags">NLP, NLTK &amp; spaCy</div>
                 <div className="what-tags">Computer Vision (OpenCV)</div>
-                <div className="what-tags">Time Series Forecasting</div>
-                <div className="what-tags">NLP &amp; Transformers</div>
                 <div className="what-tags">Explainable AI (SHAP/LIME)</div>
-                <div className="what-tags">Feature Engineering</div>
+                <div className="what-tags">XGBoost, LSTM &amp; Time Series</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -126,16 +126,16 @@ const WhatIDo = () => {
               <h3>FULL-STACK DEVELOPMENT</h3>
               <h4>End-to-End Product Engineering</h4>
               <p>
-                Architecting and shipping complete applications—from backend APIs to frontend UX. Building scalable, fault-tolerant systems that power real products used by customers.
+                Architecting and shipping complete products from backend systems to deployment. Building scalable, secure, and fault-tolerant applications with analytics, real-time communication, and IoT integrations.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Flask &amp; Python</div>
-                <div className="what-tags">MongoDB &amp; SQL</div>
+                <div className="what-tags">Flask, Streamlit &amp; Python</div>
+                <div className="what-tags">MongoDB, MySQL &amp; SQLite</div>
                 <div className="what-tags">REST APIs &amp; WebSockets</div>
-                <div className="what-tags">React &amp; Frontend</div>
-                <div className="what-tags">Firebase &amp; Cloud</div>
-                <div className="what-tags">IoT &amp; Hardware Integration</div>
+                <div className="what-tags">Cloud, Kafka &amp; Firebase</div>
+                <div className="what-tags">IoT: ESP32, NodeMCU, RFID/NFC</div>
+                <div className="what-tags">Security &amp; Scalable Architecture</div>
               </div>
               <div className="what-arrow"></div>
             </div>
